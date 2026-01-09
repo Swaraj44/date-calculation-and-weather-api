@@ -1,54 +1,34 @@
-# date-calculation-and-weather-api
+# Backend APIs – Spring Boot Project
 
-Overview
+## Overview
 
-This project is a Spring Boot–based backend application that exposes multiple REST APIs to perform:
+This repository contains a **Spring Boot–based backend API application** developed as a structured backend engineering task.  
+The application exposes multiple RESTful endpoints that perform:
 
-Date difference calculation
+1. Date difference calculation without using date libraries  
+2. Number-to-English-words conversion  
+3. Weather-based temperature statistics for Dhaka  
 
-Number to English words conversion
+The project emphasizes **clean architecture**, **input validation**, **global exception handling**, **unit testing**, and **Docker-based deployment**.
 
-Weather-based temperature statistics for Dhaka
+---
 
-The application is built following clean architecture, proper validation, global exception handling, unit testing, and Docker support.
+## Technology Stack
 
-Tech Stack
+- **Language:** Java 11  
+- **Framework:** Spring Boot 2.7.x  
+- **Build Tool:** Maven  
+- **Testing:** JUnit 5, Spring MockMvc  
+- **External API:** Open-Meteo (Weather data)  
+- **Containerization:** Docker  
 
-Java: 11
+---
 
-Spring Boot: 2.7.x
+##  Project Structure
 
-Build Tool: Maven
 
-Testing: JUnit 5, Spring MockMvc
+<img width="490" height="669" alt="image" src="https://github.com/user-attachments/assets/07871ffc-eb6e-45a7-a387-7b89d08054c1" />
 
-External API: Open-Meteo (Weather data)
-
-Containerization: Docker
-
-Project Structure
-backend_apis
-├── src
-│   ├── main
-│   │   ├── java
-│   │   │   └── com.example.backend_apis
-│   │   │       ├── controller
-│   │   │       ├── service
-│   │   │       ├── dto
-│   │   │       │   ├── request
-│   │   │       │   └── response
-│   │   │       ├── util
-│   │   │       └── exception
-│   │   └── resources
-│   └── test
-│       └── java
-│           └── com.example.backend_apis
-│               ├── controller
-│               ├── service
-│               └── util
-├── Dockerfile
-├── pom.xml
-└── README.md
 
 API Endpoints
 1. Number of Days Between Two Dates
