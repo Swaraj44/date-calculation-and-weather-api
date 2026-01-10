@@ -22,7 +22,7 @@ public class TemperatureStatsService {
 
         double[] stats = weatherService.fetchTemperatures(startDate, endDate);
 
-        System.out.println("====--->  Temperature Stats: " + stats[0] + ", " + stats[1] + ", " + stats[2]);
+        //System.out.println("====--->  Temperature Stats: " + stats[0] + ", " + stats[1] + ", " + stats[2]);
 
 
         return new Object[] {

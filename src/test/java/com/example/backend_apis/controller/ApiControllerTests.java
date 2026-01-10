@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class BackendApiControllerTest {
+class ApiControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
@@ -56,9 +56,9 @@ class BackendApiControllerTest {
 
     @Test
     void numberOfDays_invalidDate() throws Exception {
-
         
-                                String json = "{ \"startDate\": \"01-01-2024\", \"endDate\": \"2024-01-10\" }";
+        String json = "{ \"startDate\": \"01-01-2024\", \"endDate\": \"2024-01-10\" }";
+        
 
         mockMvc.perform(post("/api/number-of-days").contentType(MediaType.APPLICATION_JSON)
                 .content(json)).andExpect(status().isBadRequest()).andExpect(jsonPath("$.error").value("Bad Request"));

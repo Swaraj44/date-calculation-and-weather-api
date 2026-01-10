@@ -1,114 +1,131 @@
-# date-calculation-and-weather-api – Spring Boot Project
+# chrono-climate-api -- (Spring Boot Project)
 
 ## Overview
 
-This repository contains a **Spring Boot–based backend API application** developed as a structured backend engineering task.  
+This repository contains a **Spring Boot--based backend API
+application** developed as a structured backend engineering task.\
 The application exposes multiple RESTful endpoints that perform:
 
-1. Date difference calculation without using date libraries  
-2. Number-to-English-words conversion  
-3. Weather-based temperature statistics for Dhaka  
+1.  Date difference calculation without using date libraries\
+2.  Number-to-English-words conversion\
+3.  Weather-based temperature statistics for Dhaka
 
-The project emphasizes **clean architecture**, **input validation**, **global exception handling**, **unit testing**, and **Docker-based deployment**.
+The project emphasizes **clean architecture**, **input validation**,
+**global exception handling**, **unit testing**, and **Docker-based
+deployment**.
 
----
+------------------------------------------------------------------------
 
 ## Technology Stack
 
-- **Language:** Java 11  
-- **Framework:** Spring Boot 2.7.x  
-- **Build Tool:** Maven  
-- **Testing:** JUnit 5, Spring MockMvc  
-- **External API:** Open-Meteo (Weather data)  
-- **Containerization:** Docker  
+-   **Language:** Java 11\
+-   **Framework:** Spring Boot 2.7.18\
+-   **Build Tool:** Maven\
+-   **Testing:** JUnit 5, Spring MockMvc\
+-   **External API:** Open-Meteo (Weather data)\
+-   **Containerization:** Docker
 
----
+------------------------------------------------------------------------
 
-##  Project Structure
+## Project Structure
 
+    chrono-climate-api
+    ├── src
+    │   ├── main
+    │   │   ├── java
+    │   │   │   └── com.example.backend_apis
+    │   │   │       ├── controller
+    │   │   │       ├── service
+    │   │   │       ├── dto
+    │   │   │       │   ├── request
+    │   │   │       │   └── response
+    │   │   │       ├── util
+    │   │   │       └── exception
+    │   │   └── resources
+    │   └── test
+    │       └── java
+    │           └── com.example.backend_apis
+    │               ├── controller
+    │               ├── service
+    │               └── util
+    ├── Dockerfile
+    ├── pom.xml
+    └── README.md
 
-<img width="490" height="669" alt="image" src="https://github.com/user-attachments/assets/07871ffc-eb6e-45a7-a387-7b89d08054c1" />
+------------------------------------------------------------------------
 
+## API Endpoints
 
-API Endpoints
-1. Number of Days Between Two Dates
+### 1. Number of Days Between Two Dates
 
-Endpoint
+**Endpoint**\
+POST `/api/number-of-days`
 
-POST /number-of-days
+**Input**
 
-
-Input (JSON)
-
+``` json
 {
   "startDate": "2024-01-01",
   "endDate": "2024-01-10"
 }
+```
 
+**Output**
 
-Output (JSON)
-
+``` json
 {
   "days": 9
 }
+```
 
+**Notes** - Date format: `YYYY-MM-DD` - Date calculation implemented
+without date libraries - Regex-based input validation
 
-Notes
+------------------------------------------------------------------------
 
-Date format: YYYY-MM-DD
+### 2. Number to Words
 
-Date calculation is implemented without using any date libraries
+**Endpoint**\
+POST `/api/number-to-words`
 
-Input validated using regex
+**Input**
 
-2. Number to Words
-
-Endpoint
-
-POST /number-to-words
-
-
-Input (JSON)
-
+``` json
 {
   "number": "36.40"
 }
+```
 
+**Output**
 
-Output (JSON)
-
+``` json
 {
   "words": "thirty six point four zero"
 }
+```
 
+**Constraints** - `0 ≤ number < 1000` - Maximum 2 decimal places -
+Lowercase output - No hyphens or conjunctions
 
-Constraints
+------------------------------------------------------------------------
 
-0 <= number < 1000
+### 3. Temperature Statistics for Dhaka
 
-Maximum 2 decimal places
+**Endpoint**\
+POST `/api/temperature-stats-for-dhaka`
 
-Output in lowercase
+**Input**
 
-No hyphens or “and”
-
-3. Temperature Statistics for Dhaka
-
-Endpoint
-
-POST /temperature-stats-for-dhaka
-
-
-Input (JSON)
-
+``` json
 {
   "startDate": "2024-01-01",
   "endDate": "2024-01-05"
 }
+```
 
+**Output**
 
-Output (JSON)
-
+``` json
 {
   "min": -5.4,
   "max": 1.3,
@@ -117,102 +134,81 @@ Output (JSON)
   "maxText": "positive one point three",
   "averageText": "minus one point four four"
 }
+```
 
-
-Notes
-
-Weather data fetched from Open-Meteo
-
-Dhaka coordinates: 23.8103, 90.4125
-
-Text conversion reuses Number-to-Words logic
-
+**Notes** - Weather data fetched from Open-Meteo - Dhaka coordinates:
+`23.8103, 90.4125` - Text conversion reuses Number-to-Words logic -
 Proper floating-point rounding applied
 
-Input Validation
+------------------------------------------------------------------------
 
-Regex-based validation for:
+## Input Validation
 
-Dates
+-   Regex-based validation for dates and numbers
+-   Invalid input returns **HTTP 400 Bad Request**
+-   Centralized validation utilities
 
-Numbers
+------------------------------------------------------------------------
 
-Invalid inputs result in HTTP 400 Bad Request
+## Global Exception Handling
 
-Validation logic centralized in a utility class
+-   Implemented using `@RestControllerAdvice`
+-   Consistent JSON error responses
+-   Handles validation, illegal arguments, and runtime exceptions
 
-Global Exception Handling
+------------------------------------------------------------------------
 
-Implemented using @RestControllerAdvice
+## Testing
 
-Consistent JSON error responses
+**Coverage** - Controller tests (MockMvc) - Service tests -
+Utility/Validator tests
 
-Handles:
+**Run Tests**
 
-Validation errors
-
-Illegal arguments
-
-Runtime exceptions
-
-Testing
-Test Coverage
-
-Controller Tests (MockMvc)
-
-Service Tests
-
-Utility / Validator Tests
-
-Test Location
-src/test/java
-
-Run Tests
+``` bash
 mvn clean test
+```
 
+------------------------------------------------------------------------
 
-Tests are executed automatically as part of the build process.
+## Running the Application
 
-Running the Application Locally
-Prerequisites
-
-Java 11
-
-Maven
-
-Run
+``` bash
 mvn spring-boot:run
+```
 
+Application runs at `http://localhost:8080`
 
-Application starts at:
+------------------------------------------------------------------------
 
-http://localhost:8080
+## Docker Support
 
-Docker Support
-Build Docker Image
+**Build Image**
+
+``` bash
 docker build -t backend_apis .
+```
 
-Run Container
+**Run Container**
+
+``` bash
 docker run -p 8080:8080 backend_apis
+```
 
-Design Highlights
+------------------------------------------------------------------------
 
-Constructor-based dependency injection
+## Design Highlights
 
-Separation of concerns (Controller / Service / Utility)
+-   Constructor-based dependency injection
+-   Clear separation of concerns
+-   Reusable utilities
+-   CI-ready, build-breaking tests
 
-Reusable logic across tasks
+------------------------------------------------------------------------
 
-Build-breaking tests (CI-ready)
+## Possible Enhancements
 
-Clean, maintainable codebase
-
-Possible Enhancements
-
-Swagger / OpenAPI documentation
-
-Integration tests with Testcontainers
-
-Caching weather API responses
-
-CI/CD pipeline configuration
+-   Swagger / OpenAPI documentation
+-   Integration testing with Testcontainers
+-   Weather API response caching
+-   CI/CD pipeline setup
