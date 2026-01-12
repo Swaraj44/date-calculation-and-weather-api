@@ -100,6 +100,11 @@ chrono-climate-app/
 > docker pull swaraj66/chrono-climate-api:latest
 > docker pull swaraj66/api-client:latest
 > ```
+Run Container
+> ```bash
+> docker run -p 8080:8080 swaraj66/chrono-climate-api:latest
+> docker run -p 5173:80 swaraj66/api-client:latest
+> ```
 
 ---
 

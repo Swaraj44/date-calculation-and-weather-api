@@ -27,7 +27,7 @@ public class TemperatureStatsController {
 
         Object[] result = service.calculate(request.getStartDate(),request.getEndDate());
 
-        //System.out.println("--->  Request: " + request.getStartDate() + " to " + request.getEndDate()); 
+        
 
         return new TemperatureStatsResponse(
                 (double) result[0],(double) result[1],(double) result[2],
