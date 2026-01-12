@@ -24,9 +24,9 @@ The project emphasizes **clean architecture**, **input validation**,**global exc
 
 ------------------------------------------------------------------------
 
-## Project Structure
+## Server Structure
 
-    chrono-climate-api
+    server
     ├── src
     │   ├── main
     │   │   ├── java
